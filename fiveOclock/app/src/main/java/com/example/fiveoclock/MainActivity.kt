@@ -47,16 +47,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+            R.id.action_locations -> {
+                startActivity(Intent(this, LocationsActivity:: class.java))
+            }
+
+            R.id.action_timeCalc -> {
+                startActivity(Intent(this, TimeCalculatorActivity:: class.java))
+            }
+
+
         }
+
+        return true
     }
-*/
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {

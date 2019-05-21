@@ -9,5 +9,6 @@ import java.io.Serializable
 data class MyTimeZone (
     @PrimaryKey(autoGenerate = true) var timeZoneId : Long?,
     @ColumnInfo(name = "cityName") var cityName: String,
-    @ColumnInfo(name = "friends") var friends: String
+    @ColumnInfo(name = "friends") var friends: String,
+    @ColumnInfo(name="timezone") var zone: String
 ) : Serializable

@@ -10,9 +10,11 @@ import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ArrayAdapter.createFromResource
 import android.widget.EditText
 import android.widget.Spinner
 import com.example.fiveoclock.DATA.MyTimeZone
+import kotlinx.android.synthetic.main.new_location_dialog.*
 import kotlinx.android.synthetic.main.new_location_dialog.view.*
 
 import java.lang.RuntimeException
@@ -22,16 +24,28 @@ import java.util.*
 
 
 
-class locationDialog : DialogFragment() {
+class locationDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     interface LocationHandler {
         fun locationCreated(timeZone: MyTimeZone)
     }
 
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        zone = parent?.getItemAtPosition(position).toString()
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
+
+
+
     private lateinit var locationHandler: LocationHandler
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+
 
         if (context is LocationHandler) {
             locationHandler = context
@@ -45,8 +59,9 @@ class locationDialog : DialogFragment() {
     //private lateinit var etTodoDate: EditText
     private lateinit var etItemText: EditText
     private lateinit var etFriendsText: EditText
+    private lateinit var zone: String
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
+        //var timezones: Array<String> = TimeZone.getAvailableIDs()
 
         val builder = AlertDialog.Builder(requireContext())
 
@@ -62,6 +77,13 @@ class locationDialog : DialogFragment() {
 
         builder.setView(rootView)
 
+        val zonesAdapter = createFromResource(
+            activity,
+            R.array.Timezone,
+            android.R.layout.simple_spinner_item)
+        zonesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = zonesAdapter
+        spinner.onItemSelectedListener = this
 
         val arguments = this.arguments
 
@@ -110,7 +132,8 @@ class locationDialog : DialogFragment() {
                 null,
 
                 etItemText.text.toString(),
-                etFriendsText.text.toString()
+                etFriendsText.text.toString(),
+                zone
 
 
             )
