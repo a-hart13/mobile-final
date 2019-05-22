@@ -25,7 +25,7 @@ import java.util.*
 
 
 class locationDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
-
+    private lateinit var spinner: Spinner
     interface LocationHandler {
         fun locationCreated(timeZone: MyTimeZone)
     }
@@ -61,20 +61,21 @@ class locationDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
     private lateinit var etFriendsText: EditText
     private lateinit var zone: String
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        //var timezones: Array<String> = TimeZone.getAvailableIDs()
-
-        val builder = AlertDialog.Builder(requireContext())
-
-        builder.setTitle("New item")
 
         val rootView = requireActivity().layoutInflater.inflate(
             R.layout.new_location_dialog, null
         )
+        //var timezones: Array<String> = TimeZone.getAvailableIDs()
+
+        val builder = AlertDialog.Builder(requireContext())
+        spinner = rootView.spinner
+        builder.setTitle("New item")
+
         //etTodoDate = rootView.findViewById(R.id.etTodoText)
         // etTodoDate = rootView.etDate
         etItemText = rootView.etItem
         etFriendsText = rootView.etFriends
-
+        zone=""
         builder.setView(rootView)
 
         val zonesAdapter = createFromResource(
@@ -95,10 +96,10 @@ class locationDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
             val item = arguments.getSerializable(
                 LocationsActivity.KEY_ITEM_TO_EDIT
-            ) as TimeZone
+            ) as MyTimeZone
 
             //  etTodoDate.setText(todoItem.createDate)
-            etItemText.setText(item.displayName)
+            etItemText.setText(item.cityName)
 
 
             builder.setTitle("Edit item")
@@ -111,7 +112,11 @@ class locationDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         return builder.create()
     }
     override fun onResume() {
+
         super.onResume()
+
+
+
 
         val positiveButton = (dialog as AlertDialog).getButton(Dialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {

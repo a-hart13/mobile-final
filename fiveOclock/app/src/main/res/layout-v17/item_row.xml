@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5">
+    <TextClock
+            android:layout_height="63dp"
+            android:layout_width="278dp"
+            android:id="@+id/clock"
+    />
+    <TextView android:layout_width="227dp" android:layout_height="37dp"
+              android:id="@+id/city"
+              android:text="sample"
+
+    />
+    <TextView android:layout_width="227dp" android:layout_height="36dp"
+              android:text="sample"
+              android:id="@+id/friends"/>
+
+</LinearLayout>

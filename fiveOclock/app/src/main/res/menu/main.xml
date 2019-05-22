@@ -5,9 +5,6 @@
           android:title="@string/locations"
           android:orderInCategory="100"
           app:showAsAction="never"/>
-    <item android:id="@+id/action_timeCalc"
-          android:title="@string/time_calculator"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+
 
 </menu>

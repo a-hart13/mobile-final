@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 
 
-interface WeatherAPI {
+interface TimeAPI {
 
     @GET("/data/2.5/weather") //what
 
